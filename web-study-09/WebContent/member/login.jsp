@@ -8,7 +8,7 @@
 <script type="text/javascript" src="script/member.js"></script>
 </head>
 <body>
-	<h2>로그인</h2>
+	<h2> 로그인</h2>
 	<form action="login.do" method="post" name="frm" >
 		<table>
 			<tr>
@@ -20,7 +20,7 @@
 				<td><input type="password" name="pwd"></td>			
 			</tr>	
 			<tr>
-				<td colspan="2" align="center> 
+				<td colspan="2" align="center"> 
 					<input type="submit" value="로그인"
 									onclick="return loginCheck()">&nbsp;&nbsp;
 					<input type="reset" value="취소">&nbsp;&nbsp;
