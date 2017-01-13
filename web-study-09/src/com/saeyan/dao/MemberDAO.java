@@ -1,5 +1,6 @@
 package com.saeyan.dao;
 //member 테이블과 연동해서 작업하는 회원 테이블에서 정보를 조회하거나 추가, 수정, 삭제 작업을 하는 클래스 DAO
+//Data Access Object : DAO (데이터 접근이 목적인 클래스 (객체생성해서 사용!))
 //DAO의 주된 역할은 데이터베이스 데이터를 VO 객체로 얻어오거나 VO 객체에 저장된 값을 데이터 베이스에 추가한다. 
 //매번 이런작업을 해야하기에 객체 생성보다는 싱글톤 패턴(Singletone pattern)을 사용해서 클래스를 설계하도록 한다.
 //싱글톤 패턴은 인스턴스가 오로지 단 하나만 존재할 수 있도록 클래스를 설계하는 것을 말함. 
@@ -24,9 +25,11 @@ public class MemberDAO {
 	private MemberDAO(){
 		
 	}
+	
+	//다른 클래스에서 절대 인스턴스를 생성할 수 없음, 자기자신만 인스턴스를 생성 할 수 있다.
 	private static MemberDAO instance= new MemberDAO();
 	
-	//외부에서 값을 수정할 수 없고, 얻어 올 수만 있도록 getter만 만든다.
+	//인스턴스는 외부에서 수정은 못하고 값을 얻을 수만 있도록  getter만 만든다
 	public static MemberDAO getInstance(){
 		return instance;
 	}
@@ -53,6 +56,7 @@ public class MemberDAO {
 	//아이디만 일치하고 암호가 다르면 0, 
 	//모두 일치하면 1 리턴함.
 	public int userCheck(String userid, String pwd){
+		
 		int result = -1;
 		String sql = "select pwd from member where userid=?";
 		Connection conn = null; 
@@ -126,7 +130,6 @@ public class MemberDAO {
 	}
 	
 	
-	
 	//회원가입 시 아이디 중복을 확인할 때 사용. 
 	//해당 아이디가 있으면 1, 없으면 -1리턴.
 	public int confirmID(String userid){
@@ -196,12 +199,13 @@ public class MemberDAO {
 	//VO 객체에 저장된 정보로 회원 정보를 수정한다. 
 	public int updateMember(MemberVO mVo){
 		int result = -1; 
-		String sql = "update member set pwd=?, email=?"
+		String sql = "update member set pwd=?, email=?,"
 				+"phone=?, admin=? where userid=?";
 		
 		Connection conn = null; 
 		PreparedStatement pstmt = null; 
 		try{
+			
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mVo.getPwd());
@@ -210,6 +214,7 @@ public class MemberDAO {
 			pstmt.setInt(4, mVo.getAdmin());
 			pstmt.setString(5, mVo.getUserid());
 			result = pstmt.executeUpdate();
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

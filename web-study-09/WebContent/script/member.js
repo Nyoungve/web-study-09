@@ -1,5 +1,5 @@
 /* 로그인 유효성 체크 검사 */
-//login.jsp
+//login.jsp 에서 
 function loginCheck(){
 	if(document.frm.userid.value.length == 0 ){
 		alert("아이디를 써주세요!");
@@ -24,17 +24,18 @@ function idCheck(){
 	}
 	var url = "idCheck.do?userid=" + document.frm.userid.value;
 	window.open(url, "_blank_1",
-	"toolbar= no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+	"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
 }
 
 //아이디 중복 체크 완료 처리를 위한 자바 스크립트 함수
 //중복된 내용은 생략합니다.
+//script 함수는 해당 페이지에 생성해줌.
 //idCheck.jsp
-function idok(){
+/*function idok(){
 	opener.frm.userid.value="${userid}";
 	opener.frm.reid.value="${userid}";
 	self.close();
-}
+}*/
 
 //회원정보가 올바르게 입력되었는지 유효성을 체크하기 위한 자바 스크립트 함수 
 //join.jsp
